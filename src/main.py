@@ -8,21 +8,23 @@ import sys
  
 sys_path_PSSE=r'E:\PSS\PSSPY34'
 sys.path.append(sys_path_PSSE)
-sys_path_PSSE=r'E:\PSS\PSSPY34'
-sys.path.append(r'C:/Users/juan/AppData/Local/Programs/Python/Python312/Lib/site-packages')
+
  
 os_path_PSSE=r'E:\PSS\PSSBIN'
 os.environ['PATH'] += ';' + os_path_PSSE
 os.environ['PATH'] += ';' + sys_path_PSSE
  
 #importacion de librerias necesarias
- 
 import redirect
 import datetime
 import re
 import tkinter
 import pssexplore34
 import psspy
+
+#importacion de librerias propias
+import modules.lectura as lectura 
+import modules.informe as informe
 
 _i = psspy.getdefaultint()
 _f = psspy.getdefaultreal()
@@ -45,16 +47,22 @@ psspy.tysl(0)
 psspy.rstr(r"""savnw""")
 psspy.dynamicsmode(0)
 
+# Crear el archivo de salida
+ruta='E:/PF_IE'
+informe.crear(ruta)
 
+# Lectura de los parametros
+parametros=lectura.parametros()
+print(parametros)
 #---------------
 #lectura de datos del archivo "reserva.dat"
-bus,governor,CON,porcentaje,idg,comentario=PD.lectura('FormatoEntrada.csv')
+bus,governor,CON,porcentaje,idg,comentario,tipo=lectura.generadores()
 print(governor)
 #---------------
 
 
 #creación de listas para verificar datos y almacenar los restantes
-nombre=list()
+"""nombre=list()
 cmpval=list()
 v=list()
 v1=list()
@@ -67,12 +75,12 @@ for i in range(0,len(bus)):
    v.append(v_temp)
    v1.append(v1_temp)
    indice_ini.append(indice_ini_temp)
-   rval.append(rval_temp)
+   rval.append(rval_temp)"""
 
 
 #---------------
 #calculo de límites de los governors en este caso de TGOV1 y HYGOV
-   P=list()
+"""   P=list()
    Q=list()
 for pq in cmpval:
    P.append(pq.real)
@@ -89,7 +97,8 @@ for i,gov in enumerate(governor):
       reserva,pot=CR.HYGOV(indice_ini[i],rval[i],v[i],P[i])
       print('el limite es ',reserva)
    total+=reserva
-print('la reserva total es ',total)
+print('la reserva total es ',total)"""
+
 """
 Revisar esto porque no puede ser la potencia generada mayor que la maxima y debe estar considerado en los errores->
 RESERVATOTAL=RESERVATOTAL+((pmaxi(ngen)-P(ngen))*Aux01)
@@ -151,7 +160,7 @@ generacion restar
 #prueba para el cambio de CON
 #primero miro el CON
 
-for i,gov in enumerate(governor):
+"""for i,gov in enumerate(governor):
       if gov=='HYGOV':
          ierr,rval20=psspy.dsrval('CON',(indice_ini[i]+11))
          ierr,rval22=psspy.dsrval('CON',(indice_ini[i]+9))
@@ -175,4 +184,4 @@ for i,gov in enumerate(governor):
       reserva,pot=CR.HYGOV(indice_ini[i],rval[i],v[i],P[i])
       print('el limite es ',reserva)
    total+=reserva
-print('la reserva total es ',total)
+print('la reserva total es ',total)"""
