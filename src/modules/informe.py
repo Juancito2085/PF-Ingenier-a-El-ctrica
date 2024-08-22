@@ -40,14 +40,28 @@ def reserva_total(ruta):
 
     return
 
-def Pmax_Pgen(ruta):
+def Pmax_Pgen(ruta,ibus,nombre,id,pot_max,pot_gen,max_gen,reserva,porcentaje,dato,resopt):
     """Completa los datos de la hoja Pmax_Pgen.prn
     :param ruta: ruta donde se encuentra el archivo excel de entrada"""
     #Abrimos el archivo de excel
     workbook = openpyxl.load_workbook(ruta)
     #Seleccionamos la hoja donde vamos a completar con datos
     sheet = workbook['Pmax_Pgen.prn']
-    #Escribimos los datos en la hoja debajo de los encabezados en la fila 2
+    #Escribimos los datos en la primer fila que encontramos vacio
+    for i in range(2, sheet.max_row+1):
+        if sheet.cell(row=i, column=1).value == None:
+            sheet.cell(row=i, column=1).value = ibus
+            sheet.cell(row=i, column=2).value = nombre
+            sheet.cell(row=i, column=3).value = id
+            sheet.cell(row=i, column=4).value = pot_max
+            sheet.cell(row=i, column=5).value = pot_gen
+            sheet.cell(row=i, column=6).value = max_gen
+            sheet.cell(row=i, column=7).value = reserva
+            sheet.cell(row=i, column=8).value = porcentaje
+            sheet.cell(row=i, column=9).value = dato
+            sheet.cell(row=i, column=10).value = resopt
+            break
+
 
     return
 

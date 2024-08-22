@@ -13,6 +13,50 @@ os.environ['PATH'] += ';' + sys_path_PSSE
 
 import psspy
 
+def calculo(nombre,indice_ini,rval,v,potencia):
+    if nombre=="BSASGO":
+        reserva_maquina,potencia_maxima=BSASGO(indice_ini,potencia)
+    elif nombre=="RAVYA3":
+        reserva_maquina,potencia_maxima=RAVYA3(rval,potencia)
+    elif nombre=="GAST2A":
+        reserva_maquina,potencia_maxima=GAST2A(indice_ini,potencia)
+    elif nombre=="GAST":
+        reserva_maquina,potencia_maxima=GAST(v,rval,potencia)
+    elif nombre=="GASTWD":
+        reserva_maquina,potencia_maxima=GASTWD(indice_ini,potencia)
+    elif nombre=="HYGOV":
+        reserva_maquina,potencia_maxima=HYGOV(indice_ini,rval,v,potencia)
+    elif nombre=="HYGV5P":
+        reserva_maquina,potencia_maxima=HYGV5P(indice_ini,rval,potencia)
+    elif nombre=="HYGV7P":
+        reserva_maquina,potencia_maxima=HYGV7P(indice_ini,rval,potencia)
+    elif nombre=="IEEEG1":
+        reserva_maquina,potencia_maxima=IEEEG1(rval,v,potencia)
+    elif nombre=="IEEEG3":
+        reserva_maquina,potencia_maxima=IEEEG3(rval,v,potencia)
+    elif nombre=="IEEEG2":
+        reserva_maquina,potencia_maxima=IEEEG2(rval,v,potencia)
+    elif nombre=="IEESGO":
+        reserva_maquina,potencia_maxima=IEESGO(rval,v,potencia)
+    elif nombre=="STGV1P":
+        reserva_maquina,potencia_maxima=STGV1P(indice_ini,rval,potencia)
+    elif nombre=="STGV4P":
+        reserva_maquina,potencia_maxima=STGV4P(indice_ini,potencia)
+    elif nombre=="STGV2P":
+        reserva_maquina,potencia_maxima=STGV2P(indice_ini,potencia)
+    elif nombre=="TGOV1":
+        reserva_maquina,potencia_maxima=TGOV1(rval,v,potencia)
+    elif nombre=="WPIDHY":
+        reserva_maquina,potencia_maxima=WPIDHY(rval,v,potencia)
+    elif nombre=="GAST5":
+        reserva_maquina,potencia_maxima=GAST5(indice_ini,rval,v,potencia)
+    elif nombre=="SIE943":
+        reserva_maquina,potencia_maxima=SIE943(indice_ini,potencia)
+    elif nombre=="TUCUGO":
+        reserva_maquina,potencia_maxima=TUCUGO(indice_ini,potencia)
+    return reserva_maquina,potencia_maxima
+
+
 def BSASGO(indice_ini, potencia):
     ierr,rval1=psspy.dsrval('CON',(indice_ini+15))
     ierr,rval2=psspy.dsrval('CON',(indice_ini+10))
@@ -21,7 +65,7 @@ def BSASGO(indice_ini, potencia):
         potencia_maxima=rval1*rval2*rval3     
     if potencia_maxima>=potencia:
         reserva_maquina=potencia_maxima-potencia
-    return(reserva_maquina,potencia)
+    return(reserva_maquina,potencia_maxima)
 
 def RAVYA3(rval,potencia):
     if (potencia>0):        
@@ -65,14 +109,14 @@ def GAST2A(indice_ini,potencia):
         potencia_maxima=trate*(af2+bf2*(a/(c+a*kf))*(max*k3+k6))
         if (potencia_maxima>=potencia):
             reserva_maquina=potencia_maxima-potencia
-    return(reserva_maquina,potencia)
+    return(reserva_maquina,potencia_maxima)
 
 def GAST(v,rval,potencia):
     if (potencia>0):
         potencia_maxima=v*rval
         if (potencia_maxima>=potencia):
             reserva_maquina=potencia_maxima-potencia
-    return(reserva_maquina,potencia)
+    return(reserva_maquina,potencia_maxima)
 
 def GASTWD(indice_ini,potencia):
     c=0.0
@@ -109,7 +153,7 @@ def GASTWD(indice_ini,potencia):
         if (potencia_maxima>=potencia):
             reserva_maquina=potencia_maxima-potencia
     
-    return(reserva_maquina,potencia)
+    return(reserva_maquina,potencia_maxima)
 
 def HYGOV(indice_ini,rval,V,potencia):
     if (potencia>0):
@@ -118,7 +162,7 @@ def HYGOV(indice_ini,rval,V,potencia):
         potencia_maxima=((rval-rval20)*rval22)*V
         if (potencia_maxima>=potencia):
             reserva_maquina=potencia_maxima-potencia
-    return(reserva_maquina,potencia)
+    return(reserva_maquina,potencia_maxima)
 
 def HYGV5P(indice_ini,rval,potencia):
     if (potencia>0):
@@ -126,7 +170,7 @@ def HYGV5P(indice_ini,rval,potencia):
         potencia_maxima=rval*rval1
         if (potencia_maxima>=potencia):
             reserva_maquina=potencia_maxima-potencia
-    return(reserva_maquina,potencia)
+    return(reserva_maquina,potencia_maxima)
 
 def HYGV7P(indice_ini,rval,potencia):
     if (potencia>0):
@@ -134,36 +178,35 @@ def HYGV7P(indice_ini,rval,potencia):
         potencia_maxima=rval*rval1
         if (potencia_maxima>=potencia):
             reserva_maquina=potencia_maxima-potencia
-    return(reserva_maquina,potencia)
+    return(reserva_maquina,potencia_maxima)
 
 def IEEEG1(rval,v,potencia):
     if (potencia>0):
         potencia_maxima=v*rval
         if (potencia_maxima>=potencia):
             reserva_maquina=potencia_maxima-potencia
-    return(reserva_maquina,potencia)
+    return(reserva_maquina,potencia_maxima)
 
 def IEEEG3(rval,v,potencia):
     if (potencia>0):
         potencia_maxima=v*rval
         if (potencia_maxima>=potencia):
             reserva_maquina=potencia_maxima-potencia
-    return(reserva_maquina,potencia)
+    return(reserva_maquina,potencia_maxima)
 
 def IEEEG2(rval,v,potencia):
     if (potencia>0):
         potencia_maxima=v*rval
         if (potencia_maxima>=potencia):
             reserva_maquina=potencia_maxima-potencia
-    return(reserva_maquina,potencia)
+    return(reserva_maquina,potencia_maxima)
 
 def IEESGO(rval,v,potencia):
     if (potencia>0):
         potencia_maxima=v*rval
         if (potencia_maxima>=potencia):
           reserva_maquina=potencia_maxima-potencia
-    return(reserva_maquina,potencia)
-
+    return(reserva_maquina,potencia_maxima)
 
 def STGV1P(indice_ini,rval,potencia):
     if (potencia>0):
@@ -171,7 +214,7 @@ def STGV1P(indice_ini,rval,potencia):
         potencia_maxima=rval*rval1
         if (potencia_maxima>=potencia):
             reserva_maquina=potencia_maxima-potencia
-    return(reserva_maquina,potencia)
+    return(reserva_maquina,potencia_maxima)
 
 def STGV4P(indice_ini,potencia):
     if (potencia>0.0):
@@ -179,7 +222,7 @@ def STGV4P(indice_ini,potencia):
         potencia_maxima=rval*rval1
         if (potencia_maxima>=potencia):
             reserva_maquina=potencia_maxima-potencia
-    return(reserva_maquina,potencia)
+    return(reserva_maquina,potencia_maxima)
 
 def STGV2P(indice_ini,potencia):
     if (potencia>0):
@@ -188,21 +231,21 @@ def STGV2P(indice_ini,potencia):
         potencia_maxima=rval3*rval1
         if (potencia_maxima>=potencia):
           reserva_maquina=potencia_maxima-potencia
-    return(reserva_maquina,potencia)
+    return(reserva_maquina,potencia_maxima)
 
 def TGOV1(rval,v,potencia):
     if (potencia>0):
         potencia_maxima=v*rval
         if (potencia_maxima>=potencia):
             reserva_maquina=potencia_maxima-potencia
-    return(reserva_maquina,potencia)
+    return(reserva_maquina,potencia_maxima)
 
 def WPIDHY(rval,v,potencia):
     if (potencia>0):
         potenica_maxima=v*rval
         if (potenica_maxima>=potencia):
             reserva_maquina=potenica_maxima-potencia
-    return(reserva_maquina,potencia)
+    return(reserva_maquina,potencia_maxima)
 
 def GAST5(indice_ini,rval,v,potencia):
     ierr,rval1=psspy.dsrval('CON',(indice_ini+9))
@@ -210,7 +253,7 @@ def GAST5(indice_ini,rval,v,potencia):
         potencia_maxima=(rval-rval1)*v     
         if (potencia_maxima>=potencia):
           reserva_maquina=potencia_maxima-potencia
-    return(reserva_maquina,potencia)
+    return(reserva_maquina,potencia_maxima)
 
 def SIE943(indice_ini,potencia):
     AF1=0
@@ -245,7 +288,7 @@ def SIE943(indice_ini,potencia):
            potencia_maxima=potencia_maxima1
         if (potencia_maxima>=potencia):
            reserva_maquina=potencia_maxima-potencia
-    return(reserva_maquina,potencia)
+    return(reserva_maquina,potencia_maxima)
 
 def TUCUGO(indice_ini,potencia):
     ierr,rval1=psspy.dsrval('CON',(indice_ini+15))
@@ -255,8 +298,7 @@ def TUCUGO(indice_ini,potencia):
         potencia_maxima=((rval*rval3)-rval4)*rval1 
     if (potencia_maxima>=potencia):
         reserva_maquina=potencia_maxima-potencia
-    return(reserva_maquina,potencia)
-
+    return(reserva_maquina,potencia_maxima)
 
 def GASV94(indice_ini,rval,potencia):
     AF6=0.
@@ -290,5 +332,5 @@ def GASV94(indice_ini,rval,potencia):
             potencia_maxima=potencia_maxima1
         if (potencia_maxima>=potencia):
             reserva_maquina=potencia_maxima-potencia
-    return(reserva_maquina,potencia)
+    return(reserva_maquina,potencia_maxima)
     

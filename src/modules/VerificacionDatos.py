@@ -33,7 +33,7 @@ def verificacionDatos(ibus,id,i5):
     elif(ierr == 2):
         print('***** ERROR EN LOS DATOS DE FLUJO *****\nNOMBRE DE LA BARRA ,',ibus,', ',nombre,', MENOR A 12 CARACTERES\n')
 
-
+    id=str(id)
     #MACDT2 devuelve las cantidades complejas de la maquina
     ierr,cmpval = psspy.macdt2(ibus, id, "PQ")
     if(ierr==1):

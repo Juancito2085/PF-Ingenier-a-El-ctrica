@@ -25,6 +25,8 @@ import psspy
 #importacion de librerias propias
 import modules.lectura as lectura 
 import modules.informe as informe
+import modules.verificaciondatos as verificaciondatos
+import modules.calculoreserva as CR
 
 _i = psspy.getdefaultint()
 _f = psspy.getdefaultreal()
@@ -58,47 +60,39 @@ parametros=lectura.parametros()
 bus,governor,CON,porcentaje,idg,comentario,tipo=lectura.generadores()
 
 # 4 - Verificacion de los datos
-"""nombre=list()
+nombre=list()
 cmpval=list()
 v=list()
 v1=list()
 indice_ini=list()
 rval=list()
 for i in range(0,len(bus)):
-   nombre_temp, cmpval_temp,v_temp,v1_temp, indice_ini_temp,rval_temp=VD.verificacionDatos(bus[i],idg[i],CON[i])
+   nombre_temp, cmpval_temp,v_temp,v1_temp, indice_ini_temp,rval_temp=verificaciondatos.verificacionDatos(bus[i],idg[i],CON[i])
    nombre.append(nombre_temp)
    cmpval.append(cmpval_temp)
    v.append(v_temp)
    v1.append(v1_temp)
    indice_ini.append(indice_ini_temp)
-   rval.append(rval_temp)"""
+   rval.append(rval_temp)
 
 # 5 - Determinación de los margenes de reserva
-
-#creación de listas para verificar datos y almacenar los restantes
-
-
-
-#---------------
-#calculo de límites de los governors en este caso de TGOV1 y HYGOV
-"""   P=list()
-   Q=list()
+P=list()
+Q=list()
 for pq in cmpval:
    P.append(pq.real)
    Q.append(pq.imag)
 
-total=0
+reserva=list()
+potencia_maxima=list()
 for i,gov in enumerate(governor):
-   print(gov,i)
-   if gov=='TGOV1':
-      reserva,pot=CR.TGOV1(rval[i],v[i],P[i])
-      print('la reserva es ', reserva)
-      
-   if gov=='HYGOV':
-      reserva,pot=CR.HYGOV(indice_ini[i],rval[i],v[i],P[i])
-      print('el limite es ',reserva)
-   total+=reserva
-print('la reserva total es ',total)"""
+   res,pmax=CR.calculo(gov,indice_ini[i],rval[i],v[i],P[i])
+   reserva.append(res)
+   potencia_maxima.append(pmax)
+
+print('la reserva total es ',sum(reserva), ' y la potencia maxima es ',sum(potencia_maxima))
+# linea 1734
+
+
 
 """
 Revisar esto porque no puede ser la potencia generada mayor que la maxima y debe estar considerado en los errores->
