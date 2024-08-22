@@ -33,7 +33,7 @@ _s = psspy.getdefaultchar()
 psspy.psseinit(1000)
 
 CASE='savnw.sav'
-#print(os.path.exists(r'C:/Users/PC/OneDrive/Proyecto final de ingeniería/Programación/Ejemplos PSSE/TP1/TP_1_archivos_simulacion/1- Inicializacion/savnw.sav'))
+
 psspy.case(CASE)
 
 psspy.cong(0)
@@ -47,21 +47,17 @@ psspy.tysl(0)
 psspy.rstr(r"""savnw""")
 psspy.dynamicsmode(0)
 
-# Crear el archivo de salida
+# 1 - Crear el archivo de salida
 ruta='E:/PF_IE'
 informe.crear(ruta)
 
-# Lectura de los parametros
+# 2 - Lectura de los parametros
 parametros=lectura.parametros()
-print(parametros)
-#---------------
-#lectura de datos del archivo "reserva.dat"
+
+# 3 - Lectura de datos del archivo "reserva.dat"
 bus,governor,CON,porcentaje,idg,comentario,tipo=lectura.generadores()
-print(governor)
-#---------------
 
-
-#creación de listas para verificar datos y almacenar los restantes
+# 4 - Verificacion de los datos
 """nombre=list()
 cmpval=list()
 v=list()
@@ -76,6 +72,11 @@ for i in range(0,len(bus)):
    v1.append(v1_temp)
    indice_ini.append(indice_ini_temp)
    rval.append(rval_temp)"""
+
+# 5 - Determinación de los margenes de reserva
+
+#creación de listas para verificar datos y almacenar los restantes
+
 
 
 #---------------

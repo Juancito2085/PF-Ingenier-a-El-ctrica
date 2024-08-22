@@ -41,7 +41,7 @@ def GAST2A(indice_ini,potencia):
     max=0.0
     k3=0.0
 
-    ierr,raval22=psspy.dsrval('CON',(indice_ini+14))
+    ierr,rval22=psspy.dsrval('CON',(indice_ini+14))
     ierr,rval20=psspy.dsrval('CON',(indice_ini+16))
     ierr,rval18=psspy.dsrval('CON',(indice_ini+6))   
     ierr,rval12=psspy.dsrval('CON',(indice_ini+25))         

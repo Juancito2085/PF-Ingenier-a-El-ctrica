@@ -69,5 +69,3 @@ def generadores_no_suman():
         id.append(sheet4.cell(row=i, column=3).value)
         i+=1
     return ibus,nombre,id
-
-print(regiones_paises_limitrofes())

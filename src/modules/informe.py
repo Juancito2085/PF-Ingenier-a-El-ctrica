@@ -12,12 +12,14 @@ def crear (ruta):
     wb.create_sheet('reserva_total.prn')
     wb.create_sheet('Pmax_Pgen.prn')
     wb.create_sheet('Mayor_maxima.prn')
+    wb.create_sheet('Menor_optima.prn')
     wb.create_sheet('Reserva.rep')
     wb.create_sheet('Reserva.err')
     # Creamos los enacabezados de las hojas
     wb['reserva_total.prn'].append(['Escenario','Reserva Hidro','Reserva Termica','Reserva Total'])
-    wb['Pmax_Pgen.prn'].append(['IBUS','NOMBRE','ID','POT_MAX','POT_GEN','MAX_GEN','RESERVA%','PORCENTAJE','DATO','RESOPT'])
-    wb['Mayor_maxima.prn'].append(['IBUS','NOMBRE','ID','POT_MAX','POT_GEN','MAX_GEN','RESERVA%','PORCENTAJE','DATO','RESOPT'])
+    wb['Pmax_Pgen.prn'].append(['IBUS','NOMBRE','ID','POT_MAX[MW]','POT_GEN[MW]','MAX_GEN[MW]','RESERVA[%]','PORCENTAJE[%]','DATO','RES_OPT[[%]'])
+    wb['Mayor_maxima.prn'].append(['IBUS','NOMBRE','ID','POT_MAX[MW]','POT_GEN[MW]','MAX_GEN[MW]','RESERVA[%]','PORCENTAJE[%]','DATO','RESOPT[%]'])
+    wb['Menor_optima.prn'].append(['IBUS','NOMBRE','ID','POT_MAX[MW]','POT_GEN[MW]','MAX_GEN[MW]','RESERVA[%]','PORCENTAJE[%]','DATO','RESOPT[%]'])
     wb['Reserva.rep'].append(['Escenario','Reserva Hidro','Reserva Termica','Reserva Total'])
     wb['Reserva.err'].append(['Escenario','Reserva Hidro','Reserva Termica','Reserva Total'])
     # Guardamos el excel con el nombre Reserva_salida.xlsx
