@@ -62,7 +62,7 @@ def Pmax_Pgen(ruta,ibus,nombre,id,pot_max,pot_gen,max_gen,reserva,por_dato,resop
         sheet.cell(row=row, column=6).value = max_gen[i]
         sheet.cell(row=row, column=7).value = reserva[i]
         sheet.cell(row=row, column=8).value = por_dato[i]
-        sheet.cell(row=row, column=9).value = resopt[i]
+        sheet.cell(row=row, column=9).value = resopt
 
     
 
@@ -85,7 +85,7 @@ def Mayor_maxima(ruta,ibus,nombre,id,pot_max,pot_gen,max_gen,reserva,por_dato,re
     # Escribimos todos los datos de las listas donde los generadores tenga una reserva mayor a la maxima
     j=0
     for i in range(len(ibus)):
-        if max_gen[i]>por_dato[i]:
+        if reserva[i]>por_dato[i]:
             row=j+2
             sheet.cell(row=row, column=1).value = ibus[i]
             sheet.cell(row=row, column=2).value = nombre[i]
@@ -95,13 +95,44 @@ def Mayor_maxima(ruta,ibus,nombre,id,pot_max,pot_gen,max_gen,reserva,por_dato,re
             sheet.cell(row=row, column=6).value = max_gen[i]
             sheet.cell(row=row, column=7).value = reserva[i]
             sheet.cell(row=row, column=8).value = por_dato[i]
-            sheet.cell(row=row, column=9).value = resopt[i]
+            sheet.cell(row=row, column=9).value = resopt
             j+=1
 
     # Guardamos el archivo de excel
     workbook.save(ruta + '/Reserva_salida1.xlsx')
     workbook.close()
     return
+
+def Menor_optima(ruta,ibus,nombre,id,pot_max,pot_gen,max_gen,reserva,por_dato,resopt):
+    """Completa los datos de la hoja Menor_optima.prn
+    :param ruta: ruta donde se encuentra el archivo excel de entrada"""
+    #Abrimos el archivo de excel
+    try:
+        workbook = openpyxl.load_workbook(ruta+'/Reserva_salida1.xlsx')
+    except:
+        print('No se pudo abrir el archivo')
+        return
+    #Seleccionamos la hoja donde vamos a completar con datos
+    sheet = workbook['Menor_optima.prn']
+    # Escribimos todos los datos de las listas donde los generadores tenga una reserva mayor a la maxima
+    j=0
+    for i in range(len(ibus)):
+        if reserva[i]<resopt:
+            row=j+2
+            sheet.cell(row=row, column=1).value = ibus[i]
+            sheet.cell(row=row, column=2).value = nombre[i]
+            sheet.cell(row=row, column=3).value = id[i]
+            sheet.cell(row=row, column=4).value = pot_max[i]
+            sheet.cell(row=row, column=5).value = pot_gen[i]
+            sheet.cell(row=row, column=6).value = max_gen[i]
+            sheet.cell(row=row, column=7).value = reserva[i]
+            sheet.cell(row=row, column=8).value = por_dato[i]
+            sheet.cell(row=row, column=9).value = resopt
+            j+=1
+
+    # Guardamos el archivo de excel
+    workbook.save(ruta + '/Reserva_salida1.xlsx')
+    workbook.close()
     return
 
 def Reserva_rep(ruta):
@@ -126,17 +157,3 @@ def Reserva_err(ruta):
 
     return
 
-
-'''# Ejemplo de uso
-ruta = 'E:/PF_IE'
-ibus = 1
-nombre = 'Generador1'
-id = 'ID1'
-pot_max = 100
-pot_gen = 80
-max_gen = 120
-reserva = 20
-por_dato = 25.0
-resopt = 30.0
-
-Pmax_Pgen(ruta, ibus, nombre, id, pot_max, pot_gen, max_gen, reserva, por_dato, resopt)'''

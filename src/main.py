@@ -94,13 +94,13 @@ reserva_por=list()
 for i in range(0,len(bus)):
    reserva_por.append((reserva[i]/P[i])*100)
 
-informe.Pmax_Pgen(ruta,bus,nombre,idg,potencia_maxima,P,reserva,reserva_por,porcentaje,parametros)
+informe.Pmax_Pgen(ruta,bus,nombre,idg,potencia_maxima,P,reserva,reserva_por,porcentaje,parametros[0])
 
 # 7 - Registro de los generadores con reserva por debajo de la optima
-#informe.menor_optima(ruta,bus,nombre,idg,potencia_maxima,P,reserva,reserva_por,porcentaje,parametros)
+informe.Menor_optima(ruta,bus,nombre,idg,potencia_maxima,P,reserva,reserva_por,porcentaje,parametros[0])
 
 # 8 - Registro de los generadores con reserva mayor a la maxima
-informe.Mayor_maxima(ruta,bus,nombre,idg,potencia_maxima,P,reserva,reserva_por,porcentaje,parametros)
+informe.Mayor_maxima(ruta,bus,nombre,idg,potencia_maxima,P,reserva,reserva_por,porcentaje,parametros[0])
 
 print('la reserva total es ',sum(reserva), ' y la potencia maxima es ',sum(potencia_maxima))
 # linea 1734
