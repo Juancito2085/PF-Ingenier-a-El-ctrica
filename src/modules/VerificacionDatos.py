@@ -16,7 +16,7 @@ os.environ['PATH'] += ';' + sys_path_PSSE
 
 import psspy
 
-def verificacionDatos(ibus,id,i5):
+def generadores(ibus,id,i5):
     '''
     Función que verifica los datos obtenidos del archivo"reserva.dat"
     Los parámetros de la funcion son 
@@ -105,6 +105,89 @@ def verificacionDatos(ibus,id,i5):
         print('VERIFIQUE EL ORDEN DE ICON EN ARCHIVO reserva.DAT\n')
     return(nombre, cmpval,v,v1, indice_ini,rval)
 
+
+def gensale(ibus,nombre,id):
+    id=str(id)
+    '''Función para verificar los datos de gensale.prn'''
+    ierr,ival=psspy.busint(ibus,'TYPE')
+    if(ierr==1):
+        print('***** ERROR EN LOS DATOS DE GENSALE.PRN *****')
+        print('NO SE ENCUENTRA LA BARRA ',ibus,' ',nombre)
+        print(' ')
+    #if (ival==4):
+
+    #if (ival==1):
+
+    ierr,cmpval=psspy.macdt2(ibus,id,'PQ')
+
+    if(ierr==1):
+        print('***** ERROR EN LOS DATOS DE GENSALE.PRN *****')  
+        print('NO SE ENCUENTRA LA BARRA ',ibus ,' ',nombre)
+        print(' ')
+
+    if(ierr==2):
+        print('***** ERROR EN LOS DATOS DE GENSALE.PRN *****')
+        print('EN LA BARRA ',ibus,' ',nombre ,' NO EXISTEN MÁQUINAS CONECTADAS')
+        print(' ')
+
+    if(ierr==3) :
+        print('***** ERROR EN LOS DATOS DE GENSALE.PRN *****')
+        print('EN BARRA ',ibus,' ',nombre ,' NO EXISTEN MÁQUINAS CONECTADAS')
+        print(' ')
+        pge=0.0
+        qge=0.0
+
+    if(ierr==4) :
+        print('***** ERROR EN LOS DATOS DE GENSALE.PRN *****')    
+        print('LA BARRA ',ibus,' ',nombre ,' TIENE GENERADORES FUERA DE SERVICIO')
+        print(' ')
+        pge=0.0
+        qge=0.0
+
+    if(ierr==5) :
+        print('***** ERROR EN PROGRAMA IPLAN *****')    
+        print('***** ERROR EN LOS DATOS DE GENSALE.PRN *****')    
+        print('LA BARRA ',ibus,' ',nombre)
+        print('ERROR EN EL STRING PQ')
+        print(' ')
+
+    if(ierr==6) :
+        print('***** ERROR EN LOS DATOS DE GENSALE.PRN *****')    
+        print('PARA LA BARRA ',ibus,' ',nombre) 
+        print('NO HAY DATOS DE SECUENCIA')
+        print(' ')
+    
+    return(cmpval)
+
+def area (iarea,nombre_area):
+    ierr,cmpva_area=psspy.ardat(iarea,'GEN')
+    if(ierr==1):
+        print('***** ERROR EN LOS DATOS DE reserva_DEMANDAS *****')    
+        print('NO SE ENCUENTRA EL AREA INDICADA COMO ',iarea ,' ',nombre_area)
+        print(' ')
+        print('***** ERROR EN LOS DATOS DE reserva_DEMANDAS *****')   
+        print('NO SE ENCUENTRA EL AREA INDICADA COMO ',iarea ,' ',nombre_area)
+        print(' ')
+
+    if(ierr==2):
+        print('***** ERROR EN LOS DATOS DE reserva_DEMANDAS *****')    
+        print('EL AREA INDICADA COMO ',iarea ,' ',nombre_area,' NO POSEE SYSTEMA')
+        print(' ')
+        print('***** ERROR EN LOS DATOS DE reserva_DEMANDAS *****')    
+        print('EL AREA INDICADA COMO ',iarea ,' ',nombre_area,' NO POSEE SYSTEMA')
+        print(' ')
+
+    if(ierr==3):
+        print('***** ERROR EN LOS DATOS DE reserva_DEMANDAS *****')    
+        print('ERROR EN EL STRING ')
+        print(' ')
+        print('***** ERROR EN LOS DATOS DE reserva_DEMANDAS *****')    
+        print('ERROR EN EL STRING ')
+        print(' ')
+
+    #CALL ARDAT(iarea,'INT',PiA,QiA,ierr) revisar esto
+    
+    return(cmpva_area)
 #Datos de salida para este modulo:
 #nombre-> nombre completo del generador
 #cmpval-> valores complejos de la maquina P y Q 

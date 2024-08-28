@@ -67,7 +67,7 @@ v1=list()
 indice_ini=list()
 rval=list()
 for i in range(0,len(bus)):
-   nombre_temp, cmpval_temp,v_temp,v1_temp, indice_ini_temp,rval_temp=verificaciondatos.verificacionDatos(bus[i],idg[i],CON[i])
+   nombre_temp, cmpval_temp,v_temp,v1_temp, indice_ini_temp,rval_temp=verificaciondatos.generadores(bus[i],idg[i],CON[i])
    nombre.append(nombre_temp)
    cmpval.append(cmpval_temp)
    v.append(v_temp)
@@ -102,8 +102,24 @@ informe.Menor_optima(ruta,bus,nombre,idg,potencia_maxima,P,reserva,reserva_por,p
 # 8 - Registro de los generadores con reserva mayor a la maxima
 informe.Mayor_maxima(ruta,bus,nombre,idg,potencia_maxima,P,reserva,reserva_por,porcentaje,parametros[0])
 
-print('la reserva total es ',sum(reserva), ' y la potencia maxima es ',sum(potencia_maxima))
-# linea 1734
+# 9 - Extracción de la generación del sistema
+ibus_sale,nombre_sale,id_sale=lectura.generadores_no_suman()
+
+cmpval_sale=list()
+for i in range(0,len(ibus_sale)):
+   cmpval_sale.append(verificaciondatos.gensale(ibus_sale[i],nombre_sale[i],id_sale[i]))
+reserva_sale=0
+for pq in cmpval_sale:
+   if pq is not None:
+      reserva_sale+=pq.real
+
+# 10 - Areas a restar
+iarea,mobre_area=lectura.regiones_paises_limitrofes()
+
+for i in range(0,len(iarea)):
+   cmpval_area=verificaciondatos.generadores_no_suman(iarea[i],mobre_area[i])
+
+
 
 
 
