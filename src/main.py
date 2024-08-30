@@ -27,6 +27,7 @@ import modules.lectura as lectura
 import modules.informe as informe
 import modules.verificaciondatos as verificaciondatos
 import modules.calculoreserva as CR
+import modules.generacion as generacion
 
 _i = psspy.getdefaultint()
 _f = psspy.getdefaultreal()
@@ -123,15 +124,18 @@ for pq in cmpval_sale:
    if pq is not None:
       pga+=pq.real()
 
-# 11 - informes de todo esto
-gensadi=reserva-pge-pga
-# 12 - Sección donde recorta si el parametro[1]==1
+# 11 - Generación total a restar
+total_A, total_R=generacion.total()
+generacion_total=total_A
+# 12 - informes de todo esto
+gensadi=generacion_total-pge-pga
+# 13 - Sección donde recorta si el parametro[1]==1
 
 if parametros[1]==1:
    print('recorta')
-   # 13 - Anñalisis de cada governor para cambiar los limites ()
+   # 14 - Anñalisis de cada governor para cambiar los limites ()
 
-   # 14 Análisis de cada governor para determinar los margenes de reserva con los limites corregidos (3329)
+   # 15 Análisis de cada governor para determinar los margenes de reserva con los limites corregidos (3329)
 
 
 
