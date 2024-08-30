@@ -108,16 +108,30 @@ ibus_sale,nombre_sale,id_sale=lectura.generadores_no_suman()
 cmpval_sale=list()
 for i in range(0,len(ibus_sale)):
    cmpval_sale.append(verificaciondatos.gensale(ibus_sale[i],nombre_sale[i],id_sale[i]))
-reserva_sale=0
+pge=0
 for pq in cmpval_sale:
    if pq is not None:
-      reserva_sale+=pq.real
+      pge+=pq.real()
 
 # 10 - Areas a restar
 iarea,mobre_area=lectura.regiones_paises_limitrofes()
 
 for i in range(0,len(iarea)):
    cmpval_area=verificaciondatos.generadores_no_suman(iarea[i],mobre_area[i])
+pga=0
+for pq in cmpval_sale:
+   if pq is not None:
+      pga+=pq.real()
+
+# 11 - informes de todo esto
+gensadi=reserva-pge-pga
+# 12 - Sección donde recorta si el parametro[1]==1
+
+if parametros[1]==1:
+   print('recorta')
+   # 13 - Anñalisis de cada governor para cambiar los limites ()
+
+   # 14 Análisis de cada governor para determinar los margenes de reserva con los limites corregidos (3329)
 
 
 
