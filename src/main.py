@@ -129,6 +129,7 @@ total_A, total_R=generacion.total()
 generacion_total=total_A
 # 12 - informes de todo esto
 gensadi=generacion_total-pge-pga
+print(gensadi)
 # 13 - Sección donde recorta si el parametro[1]==1
 
 if parametros[1]==1:

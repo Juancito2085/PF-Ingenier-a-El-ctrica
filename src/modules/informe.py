@@ -16,12 +16,12 @@ def crear (ruta):
     wb.create_sheet('Reserva.rep')
     wb.create_sheet('Reserva.err')
     # Creamos los enacabezados de las hojas
-    wb['reserva_total.prn'].append(['Escenario','Reserva Hidro','Reserva Termica','Reserva Total'])
+    wb['reserva_total.prn'].append(['Escenario','Reserva Hidro','Reserva Termica','Reserva Total'])#1
     wb['Pmax_Pgen.prn'].append(['IBUS','NOMBRE','ID','POT_MAX[MW]','POT_GEN[MW]','MAX_GEN[MW]','RESERVA_DATO[%]','PORCENTAJE[%]','RES_OPT[%]'])
     wb['Mayor_maxima.prn'].append(['IBUS','NOMBRE','ID','POT_MAX[MW]','POT_GEN[MW]','MAX_GEN[MW]','RESERVA_DATO[%]','PORCENTAJE[%]','RESOPT[%]'])
     wb['Menor_optima.prn'].append(['IBUS','NOMBRE','ID','POT_MAX[MW]','POT_GEN[MW]','MAX_GEN[MW]','RESERVA_DATO[%]','PORCENTAJE[%]','RESOPT[%]'])
-    wb['Reserva.rep'].append(['Escenario','Reserva Hidro','Reserva Termica','Reserva Total'])
-    wb['Reserva.err'].append(['Escenario','Reserva Hidro','Reserva Termica','Reserva Total'])
+    wb['Reserva.rep'].append(['Escenario','Reserva Hidro','Reserva Termica','Reserva Total'])#2
+    wb['Reserva.err'].append(['Escenario','Reserva Hidro','Reserva Termica','Reserva Total'])#3
     # Guardamos el excel con el nombre Reserva_salida.xlsx
     ruta_completa= ruta+'/Reserva_salida1.xlsx'
     wb.save(ruta_completa)
