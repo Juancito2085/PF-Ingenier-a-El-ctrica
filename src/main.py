@@ -1,20 +1,15 @@
 import os
 import sys
-
-#import LecturaDatos as LD
-#import VerificacionDatos as VD
-#import CalculoReserva as CR
-#import PruebaExcel as PD
  
-sys_path_PSSE=r'E:\PSS\PSSPY34'
+sys_path_PSSE=r'C:\Program Files (x86)\PTI\PSSEXplore34\PSSPY34'
 sys.path.append(sys_path_PSSE)
 
  
-os_path_PSSE=r'E:\PSS\PSSBIN'
+os_path_PSSE=r'C:\Program Files (x86)\PTI\PSSEXplore34\PSSBIN'
 os.environ['PATH'] += ';' + os_path_PSSE
 os.environ['PATH'] += ';' + sys_path_PSSE
  
-#importacion de librerias necesarias
+# Importación de librerias necesarias
 import redirect
 import datetime
 import re

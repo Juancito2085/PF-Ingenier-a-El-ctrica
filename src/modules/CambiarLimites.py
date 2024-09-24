@@ -6,9 +6,9 @@
 import os
 import sys
 
-sys_path_PSSE=r'E:\PSS\PSSPY34'
+sys_path_PSSE=r'C:\Program Files (x86)\PTI\PSSEXplore34\PSSPY34'
 sys.path.append(sys_path_PSSE)
-sys_path_PSSE=r'E:\PSS\PSSPY34'
+sys_path_PSSE=r'C:\Program Files (x86)\PTI\PSSEXplore34\PSSPY34'
 sys.path.append(r'C:/Users/juan/AppData/Local/Programs/Python/Python312/Lib/site-packages')
 
 os_path_PSSE=r'E:\PSS\PSSBIN'
